@@ -1,25 +1,27 @@
 package org.example.c;
 
+import org.example.ExecutionState;
 import java.util.List;
 import java.util.Random;
 
 public class Worker extends Thread {
     List<Integer> list;
 
-    Boolean state;
+    ExecutionState state;
     Barrier barrier;
 
-    Random random = new Random();
+    Random random;
 
-    Worker(List<Integer> list, Boolean state, Barrier barrier) {
+    Worker(List<Integer> list, ExecutionState state, Barrier barrier, Random random) {
         this.list = list;
         this.state = state;
         this.barrier = barrier;
+        this.random = random;
     }
 
     @Override
     public void run() {
-        while (state) {
+        while (state.getState()) {
             try {
                 int index = random.nextInt(0, list.size());
                 int value = random.nextBoolean() ? 1 : -1;

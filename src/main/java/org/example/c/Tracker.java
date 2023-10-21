@@ -1,14 +1,16 @@
 package org.example.c;
 
+import org.example.ExecutionState;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 public class Tracker implements Runnable {
-    Boolean state;
+    ExecutionState state;
     List<List<Integer>> lists;
 
-    Tracker(Boolean state, List<List<Integer>> lists) {
+    Tracker(ExecutionState state, List<List<Integer>> lists) {
         this.state = state;
         this.lists = lists;
     }
@@ -31,7 +33,7 @@ public class Tracker implements Runnable {
         System.out.println();
 
         if (sums.size() == 1) {
-            state = false;
+            state.setState(false);
         }
 
         try {
